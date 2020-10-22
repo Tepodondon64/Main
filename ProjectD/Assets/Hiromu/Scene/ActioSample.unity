@@ -171,7 +171,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 3a945ff565403a3439ad7c860ebae373, type: 2}
+  - {fileID: 2100000, guid: 6cc9db02938bb3944b30f7544f0866a8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 104405552}
   - component: {fileID: 104405551}
   - component: {fileID: 104405556}
-  - component: {fileID: 104405555}
+  - component: {fileID: 104405557}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -245,7 +245,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: b637e33f1e165904dbd0aa9bd31cdbfd, type: 2}
+  - {fileID: 2100000, guid: 9f86deea448b4a747adf7d1e80be3b95, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -287,20 +287,6 @@ Transform:
   m_Father: {fileID: 591489067}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &104405555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 104405550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 169b6bb0ad469dc4dace7f645de592a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Rspeed: 90
-  Angleflg: 0
-  CameraObject: {fileID: 461217799}
 --- !u!54 &104405556
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -316,6 +302,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 14
   m_CollisionDetection: 0
+--- !u!114 &104405557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 104405550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b126135ae0c8b74f9f26f4d898e1452, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rspeed: 90
+  Angleflg: 0
+  CameraObject: {fileID: 461217799}
 --- !u!1 &155673745
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,9 +431,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 169b6bb0ad469dc4dace7f645de592a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rspeed: 90
-  Angleflg: 0
-  CameraObject: {fileID: 0}
 --- !u!1 &461217799
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,7 +570,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 4ffe34874d18c664f965f242fda1c1d2, type: 2}
+  - {fileID: 2100000, guid: a78a0a665eaebee4ebd9398c761bce1a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -643,7 +640,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 591489061}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c6ca7728e7e9b84b95a44a5bb092f01, type: 3}
+  m_Script: {fileID: 11500000, guid: ced0273d90271e140bc4eea17c91b695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Mspeed: 30
