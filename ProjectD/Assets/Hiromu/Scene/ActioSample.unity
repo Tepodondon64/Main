@@ -564,7 +564,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 47f27bea5801ea84c966c1448e5fbfe7, type: 2}
+  - {fileID: 2100000, guid: e859684a38bff5d43a321755e31a864c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -965,12 +965,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114609669743978356, guid: 66802eb7def5a1044ae31481b6817466,
+    - target: {fileID: 114767874605522536, guid: 66802eb7def5a1044ae31481b6817466,
         type: 2}
       propertyPath: CameraObject
       value: 
       objectReference: {fileID: 461217799}
-    - target: {fileID: 114767874605522536, guid: 66802eb7def5a1044ae31481b6817466,
+    - target: {fileID: 114609669743978356, guid: 66802eb7def5a1044ae31481b6817466,
         type: 2}
       propertyPath: CameraObject
       value: 
