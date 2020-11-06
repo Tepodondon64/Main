@@ -7,11 +7,10 @@ public class PlayerContoller : MonoBehaviour {
     //private Vector3 ido;
 
     public float Mspeed; //プレイヤーの動くスピード
-    public float Rspeed; //プレイヤーの傾くスピード
-
-    public int Angleflg;
-
     public GameObject CameraObject;//カメラを入れる
+    public int JumpPower = 1;
+    public int JumpSpeed = 20;
+
 
     private Vector3 Player_pos; //プレイヤーのポジション
     private float Lx; //左スティックのx方向のImputの値
@@ -19,7 +18,9 @@ public class PlayerContoller : MonoBehaviour {
     private float Rx; //右スティックのx方向のImputの値
     private float Rz; //右スティックのz方向のInputの値
     private Rigidbody rigd;
+    private int Angleflg;
 
+    private int A;
 	// Use this for initialization
 	void Start () {
         Player_pos = GetComponent<Transform>().position; //最初の時点でのプレイヤーのポジションを取得
@@ -36,8 +37,8 @@ public class PlayerContoller : MonoBehaviour {
 
         Rx = Input.GetAxis("Horizontal2"); //右スティックのx方向のInputの値を取得
         Rz = Input.GetAxis("Vertical2"); //右スティックのz方向のInputの値を取得
-        float A = 0;
 
+        float A = 0;
 
         float Lradian = Mathf.Atan2(Lz, Lx) * Mathf.Rad2Deg;//左スティックの倒した時の正確な角度
 
@@ -57,23 +58,52 @@ public class PlayerContoller : MonoBehaviour {
         //rigd.AddForce(Lx, 0, Lz);//移動処理
        // rigd.AddForce(Lx, 0, Lz);//移動処理
 
-        else if (Lx != 0 || Lz != 0)//左スティックの回転てきなやつ(動かしてたら通る)
+
+        if (Lx != 0 || Lz != 0)//左スティックの回転てきなやつ(動かしてたら通る)
         {
-            //  transform.localRotation = Quaternion.Euler(0, 0, 0);//初期地点に傾き
-           // Angleflg = 0;
-            transform.localRotation = Quaternion.Euler(0, CameraObject.transform.eulerAngles.y + Lradian * -1 + 90, 0);//
+            
+
+
+            transform.localRotation = Quaternion.Euler(0, CameraObject.transform.eulerAngles.y + Lradian * -1 + 90, 0);//プレイヤーの回転
+
+            //rigd.MovePosition(transform.localPosition + (transform.rotation * new Vector3(transform.forward.x * Mspeed,
+             //   0, transform.forward.z * Mspeed)));
+
+            rigd.velocity += (new Vector3(transform.forward.x * Mspeed, 0, transform.forward.z * Mspeed));//プレイヤーの移動
+            //rigd.velocity = new Vector3(0, 0, 1 * Mspeed); //プレイヤーのRigidbodyに対してInputにspeedを掛けた値で更新し移動
+        }
+
+        else if (Lx == 0 && Lz == 0)//左スティックの回転てきなやつ(動かして無ければ通る
+        {
+            rigd.velocity += (new Vector3(0, 0, 0));    //プレイヤーの移動していないとき
+
+            //transform.up * JumpPower
+           // rigd.velocity = (new Vector3(0, transform.up.y * JumpPower, 0));
+            
+           // rigd.velocity = new Vector3(Lx * Mspeed, rigd.mass * -1, Lz * Mspeed); //プレイヤーのRigidbodyに対してInputにspeedを掛けた値で更新し移動
+        }
+
+        //(CameraObject.transform.eulerAngles.y + Lradian)
+        //Debug.Log(radian);//
+        //Debug.Log(A);
+        //(移動してないときも)常に重力をかけている //RigidbodyのMass(重さ)
+        //rigd.velocity = new Vector3(  Lx * Mspeed, rigd.mass * -1, Lz * Mspeed); //プレイヤーのRigidbodyに対してInputにspeedを掛けた値で更新し移動
+        if (Lz != 0)
+        {
+            //rigd.velocity = transform.forward * 1 * Mspeed;
+        }
+        else
+        {
+            //rigd.velocity = transform.forward * 0;
         }
 
         
-        //Debug.Log(radian);//
-        Debug.Log(A);
-
-        //rigd.velocity = new Vector3(Lx * Mspeed, 0, Lz * Mspeed); //プレイヤーのRigidbodyに対してInputにspeedを掛けた値で更新し移動
+        //rigd.MovePosition(transform.forward * 1 * Mspeed);
 
         //Vector3 diff = transform.position - Player_pos; //プレイヤーがどの方向に進んでいるかがわかるように、初期位置と現在地の座標差分を取得
 
        // rigd.rotation
-        Player_pos = transform.position; //プレイヤーの位置を更新
+        //Player_pos = transform.position; //プレイヤーの位置を更新
 
         if (Rz > 0 && Rx == 0)//前
         {
@@ -138,6 +168,16 @@ public class PlayerContoller : MonoBehaviour {
         if (Angleflg == 1)
         {
             transform.localRotation = Quaternion.Euler(0, CameraObject.transform.eulerAngles.y + Rradian * -1 + 90, 0);//
+        }
+        //ジャンプ
+        // ★追加（ジャンプ）//Input.GetButtonDown("RT")
+        if (Input.GetButtonDown("RB"))//コントローラー操作///GetButton//GetButtonDown//GetButtonUp
+        {
+            //rigd.mass * -1
+            Debug.Log("ジャンプだ!");
+            //rigd.velocity = Vector3.up * JumpSpeed;
+            //rigd.velocity = new Vector3(0, (JumpPower) + (rigd.mass) * JumpSpeed, 0);
+            rigd.velocity = transform.up * (JumpPower + rigd.mass -1);
         }
 	}
 }
