@@ -41,7 +41,7 @@ public class SwordController : MonoBehaviour {
         }
 
 
-        Debug.Log(A);
+       // Debug.Log(A);
 
         if (Rz > 0 && Rx == 0)//前
         {
