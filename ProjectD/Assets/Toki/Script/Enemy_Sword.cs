@@ -6,6 +6,8 @@ public class Enemy_Sword : MonoBehaviour
 {
     private bool attack = false;
 
+    private float anglex = 0.0f;
+
     private GameObject enemy;
 
 	// Use this for initialization
@@ -19,14 +21,25 @@ public class Enemy_Sword : MonoBehaviour
     {
 		if(attack)
         {
-            transform.rotation = Quaternion.Euler(enemy.transform.right * 90);
+            anglex += 5;
+             
+            if(anglex > 90f)
+            {
+                attack = false;
+            }
         }
 
         else
         {
-            transform.rotation = Quaternion.Euler(enemy.transform.right * 0);
+            if(anglex > 0)
+            {
+                anglex -= 5;
+            }
+
         }
-	}
+
+        transform.localRotation = Quaternion.Euler(anglex, 0, 0);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
