@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Hiromu/Scene/ActioSample.unity
+- path: Assets/Toki/Scene/Test_Enemy.unity
   isLoaded: 1
   isActive: 1

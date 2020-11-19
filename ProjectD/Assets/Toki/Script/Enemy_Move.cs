@@ -6,9 +6,11 @@ public class Enemy_Move : MonoBehaviour
 {
     private Rigidbody rb;
 
-    public GameObject Player = null;
+    [HideInInspector] public GameObject Player = null;
 
     [SerializeField] private float speed = 0;
+
+    [SerializeField] private float maai = 0f;
 
 	// Use this for initialization
 	void Start ()
@@ -26,10 +28,33 @@ public class Enemy_Move : MonoBehaviour
     {
         if(Player != null)
         {
-            transform.LookAt(new Vector3(Player.transform.position.x, transform.position.y, Player.transform.position.z));
+
+            Vector3 middle = Player.transform.position - transform.position;
+
+            float angle = Mathf.Atan2(middle.x, middle.z) * Mathf.Rad2Deg;
+
+            
+
+            transform.rotation = Quaternion.Euler(new Vector3(0, angle, 0));
         }
 
-        rb.MovePosition(transform.position + transform.forward * speed);
+
+        if(Player != null)
+        {
+            float distance = Vector3.Distance(transform.position, Player.transform.position);
+
+            if(distance <= maai)
+            {
+                rb.MovePosition(transform.position + transform.right * (speed / 4));
+            }
+            else
+            {
+                rb.MovePosition(transform.position + transform.forward * speed);
+            }
+
+        }
+
+        
 
         Player = null;
     }
