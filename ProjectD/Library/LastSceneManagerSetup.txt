@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Hiromu/Scene/ActioSample.unity
+- path: Assets/Keita/Scene/map.unity
   isLoaded: 1
   isActive: 1
