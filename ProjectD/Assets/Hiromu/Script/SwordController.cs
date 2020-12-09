@@ -7,9 +7,9 @@ public class SwordController : MonoBehaviour {
 
     public float Rspeed; //剣の傾くスピード
 
-    public int Angleflg;    //剣が傾いているかどうか?
-
     public GameObject CameraObject;//カメラを入れる
+
+    public bool AttackFlg;  //攻撃が入力されたらtrueになる
 
     private float Rx; //右スティックのx方向のImputの値
     private float Rz; //右スティックのz方向のInputの値
@@ -22,7 +22,7 @@ public class SwordController : MonoBehaviour {
        //CameraObject.transform.eulerAngles = CameraTransform;
 //CameraObject.transform.eulerAngles;
         //transform.eulerAngles
-        Angleflg = 0;
+        AttackFlg = false;
     }
 
     // Update is called once per frame
@@ -31,7 +31,6 @@ public class SwordController : MonoBehaviour {
 
         Rx = Input.GetAxis("Horizontal2"); //右スティックのx方向のInputの値を取得
         Rz = Input.GetAxis("Vertical2"); //右スティックのz方向のInputの値を取得
-        float A = 0;
 
         float radian = Mathf.Atan2(Rz, Rx) * Mathf.Rad2Deg;//
 
@@ -49,32 +48,32 @@ public class SwordController : MonoBehaviour {
             // transform.localRotation = Quaternion.Euler(90,0, 0);
             //CameraObject.transform.eulerAngles.yを使ってカメラの向いている方向を前方向としている。以下↓のソースで使用している目的も同様です。
             transform.localRotation = Quaternion.Euler(90,0, 0);//
-            Angleflg = 1;
+            AttackFlg = true;
         }
         if (Rz > 0 && Rx > 0)//右前
         {
             transform.localRotation = Quaternion.Euler(90,0, 0);//
-            Angleflg = 1;
+            AttackFlg = true;
         }
 
         if (Rz < 0 && Rx == 0)//後ろ
         {
             Debug.Log("後ろ");
             transform.localRotation = Quaternion.Euler(90,0, 0);//
-            Angleflg = 1;
+            AttackFlg = true;
         }
 
         if (Rz < 0 && Rx > 0)//右後ろ
         {
             transform.localRotation = Quaternion.Euler(90,0, 0);//
-            Angleflg = 1;
+            AttackFlg = true;
         }
 
         if (Rx > 0 && Rz == 0)//右
         {
             Debug.Log("右");
             transform.localRotation = Quaternion.Euler(90,0, 0);//
-            Angleflg = 1;
+            AttackFlg = true;
         }
 
 
@@ -82,30 +81,30 @@ public class SwordController : MonoBehaviour {
         {
             Debug.Log("左");
             transform.localRotation = Quaternion.Euler(90,0, 0);//に傾き
-            Angleflg = 1;
+            AttackFlg = true;
         }
 
         if (Rx < 0 && Rz > 0)//左前
         {
             transform.localRotation = Quaternion.Euler(90,0, 0);//
-            Angleflg = 1;
+            AttackFlg = true;
         }
 
         if (Rx < 0 && Rz < 0)//左後ろ
         {
             transform.localRotation = Quaternion.Euler(90,0, 0);//
-            Angleflg = 1;
+            AttackFlg = true;
         }
 
         else if (Rx == 0 && Rz == 0)
         {
             transform.localRotation = Quaternion.Euler(0, 0, 0);//初期地点に傾き
-            Angleflg = 0;
+            AttackFlg = false;
         }
 
-        if (Angleflg == 1)
-        {
-            transform.localRotation = Quaternion.Euler(90,0, 0);//
-        }
+        //if (AttackFlg == true)
+        //{
+        //    transform.localRotation = Quaternion.Euler(90,0, 0);//
+        //}
     }
 }
