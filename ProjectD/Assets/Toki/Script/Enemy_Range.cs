@@ -5,12 +5,12 @@ using UnityEngine;
 public class Enemy_Range : MonoBehaviour
 {
 
-    private Enemy_Move enemy_script;
+    private Escape_Enemy enemy_script;
 
 	// Use this for initialization
 	void Start ()
     {
-        enemy_script = transform.parent.GetComponent<Enemy_Move>();
+        enemy_script = transform.parent.GetComponent<Escape_Enemy>();
 	}
 	
 	// Update is called once per frame
