@@ -31,8 +31,11 @@ public class CameraContoller : MonoBehaviour {
     void Start()
     {
 
-        offset = new Vector3((cameraVec.x) - player.transform.position.x, (cameraVec.y) - player.transform.position.y,
-           (cameraVec.z) - player.transform.position.z);
+        //offset = new Vector3((cameraVec.x) - player.transform.position.x, (cameraVec.y) - player.transform.position.y,
+        //   (cameraVec.z) - player.transform.position.z);
+
+        offset = new Vector3((cameraVec.x), (cameraVec.y),
+           (cameraVec.z));
 
 
         transform.localRotation = Quaternion.Euler(cameraDir.x, cameraDir.y, cameraDir.z);
@@ -81,7 +84,7 @@ public class CameraContoller : MonoBehaviour {
         }
 
 
-        if (Frontflg == true)
+        if (Frontflg == true)//カメラがプレイヤーの正面方向を向く
         {
             DirectionAngle = (CameraAngele - DummyPlayerAngle);    //カメラのアングルとプレイヤーのアングルを引いて必要な回転量を求めるよ
 

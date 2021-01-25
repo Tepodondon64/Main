@@ -23,6 +23,11 @@ public class PlayerContoller : MonoBehaviour {
 
     private bool Grandflg;   //地面にいるか？ //false:地面にいない    true:地面にいる
 
+    private float posY;
+
+    Animator animator;
+
+    //private float Min = 3 , Max = 5;
 
 	void Start () {
         Player_pos = GetComponent<Transform>().position; //最初の時点でのプレイヤーのポジションを取得
@@ -30,6 +35,7 @@ public class PlayerContoller : MonoBehaviour {
         Angleflg = 0;
         Grandflg = true;//
         GrandCount = 5;
+        animator = GetComponent<Animator>();
 	}
 
     void OnCollisionStay(Collision other)//触れているとき
@@ -38,6 +44,7 @@ public class PlayerContoller : MonoBehaviour {
         {
             GrandCount--;
             Grandflg = true;
+            animator.SetBool("Jump_Bool", false);//ジャンプアニメーションを止める
         }
     }
     void OnCollisionExit(Collision other)//触れていないとき
@@ -56,6 +63,7 @@ public class PlayerContoller : MonoBehaviour {
         Rx = Input.GetAxis("Horizontal2"); //右スティックのx方向のInputの値を取得
         Rz = Input.GetAxis("Vertical2"); //右スティックのz方向のInputの値を取得
 
+        posY = transform.position.y;
 
         float Lradian = Mathf.Atan2(Lz, Lx) * Mathf.Rad2Deg;//左スティックの倒した時の正確な角度
 
@@ -74,7 +82,7 @@ public class PlayerContoller : MonoBehaviour {
 
         if (Lx != 0 || Lz != 0)//左スティックの回転てきなやつ(動かしてたら通る)
         {
-
+            animator.SetBool("Idle_Bool", false);//待機アニメーションを止める
             if (Rradian == 0 && Angleflg == 0)//攻撃中では無いとき
             {
 
@@ -82,6 +90,7 @@ public class PlayerContoller : MonoBehaviour {
 
                 if(Grandflg == true)//地面にいるとき
                 {
+                    animator.SetBool("Walk_Bool", true);//歩くアニメーションをする
                     if (GrandCount < 0)
                     {
                         rigd.velocity += (new Vector3(transform.forward.x * Mspeed, 0, transform.forward.z * Mspeed));//プレイヤーの移動
@@ -102,7 +111,8 @@ public class PlayerContoller : MonoBehaviour {
             }
             else if (Rradian != 0 || Angleflg == 1 && Grandflg == false)//攻撃中で空中にいるとき
             {
-                    rigd.velocity += (new Vector3(transform.forward.x * Mspeed * 2, -1, transform.forward.z * Mspeed * 2));//プレイヤーの移動
+                animator.SetBool("Walk_Bool", false);//歩くアニメーションを止める
+                rigd.velocity += (new Vector3(transform.forward.x * Mspeed * 2, -1, transform.forward.z * Mspeed * 2));//プレイヤーの移動
             }
         }
 
@@ -112,6 +122,8 @@ public class PlayerContoller : MonoBehaviour {
             {
 
                 rigd.velocity += (new Vector3(0, 0, 0));    //プレイヤーの移動していないとき
+                animator.SetBool("Walk_Bool", false);//歩くアニメーションを止める
+                animator.SetBool("Idle_Bool", true);//待機アニメーションをする
             }
             if (Grandflg == false)//空中にいるとき
             {
@@ -120,6 +132,9 @@ public class PlayerContoller : MonoBehaviour {
         }
 
 
+        /***************************
+         * 右スティックの操作判定***
+         ***************************/
 
         if (Rz > 0 && Rx == 0)//前
         {
@@ -178,19 +193,25 @@ public class PlayerContoller : MonoBehaviour {
         {
           //  transform.localRotation = Quaternion.Euler(0, 0, 0);//初期地点に傾き
             Angleflg = 0;
+            animator.SetBool("Atack_Bool", false);//攻撃アニメーションを止める
         }
 
-        if (Angleflg == 1)
+        if (Angleflg == 1)  //攻撃中
         {
+            animator.SetBool("Atack_Bool", true);//攻撃アニメーションをする
             transform.localRotation = Quaternion.Euler(0, CameraObject.transform.eulerAngles.y + Rradian * -1 + 90, 0);//
         }
+
 
         // ★（ジャンプ）//
         if (Input.GetButtonDown("RB"))//コントローラー操作///GetButton//GetButtonDown//GetButtonUp
         {
-            //Debug.Log("ジャンプだ!");
+            animator.SetBool("Idle_Bool", false);//待機アニメーションを止める
+            animator.SetBool("Walk_Bool", false);//歩くアニメーションを止める
+            //animator.SetBool("Atack_Bool", false);//攻撃アニメーションを止める
+            animator.SetBool("Jump_Bool", true);//ジャンプアニメーションをする
             rigd.velocity = transform.up * (JumpPower + rigd.mass -1);
-            //※今の所は∞ジャンプ可能
+            //※今の所は∞ジャンプ可能修正予定あり。
         }
 	}
 }
