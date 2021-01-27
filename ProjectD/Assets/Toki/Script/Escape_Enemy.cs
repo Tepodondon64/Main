@@ -146,12 +146,12 @@ public class Escape_Enemy : MonoBehaviour
                         {
                             case 0:
 
-                                avoid_flg = false;
-                                break;
 
                             case 1:
 
-                               
+                                avoid_flg = false;
+                                break;
+
 
                             case 2:
                                 transform.position += transform.right * 2;
@@ -330,7 +330,7 @@ public class Escape_Enemy : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         if (P_Sword.AttackFlg)
         {
@@ -340,7 +340,7 @@ public class Escape_Enemy : MonoBehaviour
             {
 
 
-                if (collision.gameObject.tag == "Sword")
+                if (other.gameObject.tag == "Sword")
                 {
                     enemy_state = 6;
 
@@ -352,6 +352,8 @@ public class Escape_Enemy : MonoBehaviour
             }
         }
     }
+
+
 
 
 

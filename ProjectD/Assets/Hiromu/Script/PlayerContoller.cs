@@ -27,16 +27,25 @@ public class PlayerContoller : MonoBehaviour {
 
     Animator animator;
 
+    private bool Happyflg;
+    private bool IdleLong_flg;
+    private bool Know_Down_flg;
+    private bool Know_Back_flg;
     //private float Min = 3 , Max = 5;
 
-	void Start () {
+    void Start () {
         Player_pos = GetComponent<Transform>().position; //最初の時点でのプレイヤーのポジションを取得
         rigd = GetComponent<Rigidbody>(); //プレイヤーのRigidbodyを取得
         Angleflg = 0;
         Grandflg = true;//
         GrandCount = 5;
         animator = GetComponent<Animator>();
-	}
+        Happyflg = false;
+        IdleLong_flg = false;
+        Know_Down_flg = false;
+        Know_Back_flg = false;
+
+    }
 
     void OnCollisionStay(Collision other)//触れているとき
     {
@@ -213,5 +222,63 @@ public class PlayerContoller : MonoBehaviour {
             rigd.velocity = transform.up * (JumpPower + rigd.mass -1);
             //※今の所は∞ジャンプ可能修正予定あり。
         }
-	}
+
+        if (Input.GetButtonDown("Fire1") && Happyflg == false)//コントローラー操作///GetButton//GetButtonDown//GetButtonUp
+        {
+            animator.SetBool("Idle_Bool", false);//待機アニメーションを止める
+            animator.SetBool("Happy_Bool", true);//Happyアニメーションを始める
+            Happyflg = true;
+        }
+
+       else if (Input.GetButtonDown("Fire1") && Happyflg == true)//コントローラー操作///GetButton//GetButtonDown//GetButtonUp
+        {
+            animator.SetBool("Idle_Bool", true);//待機アニメーションを始める
+            animator.SetBool("Happy_Bool", false);//Happyアニメーションを止める
+            Happyflg = false;
+        }
+
+        if (Input.GetButtonDown("Fire2") && IdleLong_flg == false)//コントローラー操作///GetButton//GetButtonDown//GetButtonUp
+        {
+            animator.SetBool("Idle_Bool", false);//待機アニメーションを止める
+            animator.SetBool("IdleLong_Bool", true);//長い待機アニメーションを始める
+            IdleLong_flg = true;
+        }
+
+       else if (Input.GetButtonDown("Fire2") && IdleLong_flg == true)//コントローラー操作///GetButton//GetButtonDown//GetButtonUp
+        {
+            animator.SetBool("Idle_Bool", true);//待機アニメーションを始める
+            animator.SetBool("IdleLong_Bool", false);//長いアニメーションを止める
+            IdleLong_flg = false;
+        }
+
+        if (Input.GetButtonDown("Fire3") && Know_Back_flg == false)//コントローラー操作///GetButton//GetButtonDown//GetButtonUp
+        {
+            animator.SetBool("Idle_Bool", false);//待機アニメーションを止める
+            animator.SetBool("Know_Back_Bool", true);//ノックバックアニメーションを始める
+            Know_Back_flg = true;
+        }
+
+        else if (Input.GetButtonDown("Fire3") && Know_Back_flg == true)//コントローラー操作///GetButton//GetButtonDown//GetButtonUp
+        {
+            animator.SetBool("Idle_Bool", true);//待機アニメーションを始める
+            animator.SetBool("Know_Back_Bool", false);//ノックバックアニメーションを止める
+            Know_Back_flg = false;
+        }
+
+        if (Input.GetButtonDown("Jump") && Know_Down_flg == false)//コントローラー操作///GetButton//GetButtonDown//GetButtonUp
+        {
+            animator.SetBool("Idle_Bool", false);//待機アニメーションを止める
+            animator.SetBool("Know_Down_Bool", true);//ノックダウンアニメーションを始める
+            Know_Down_flg = true;
+        }
+
+        else if (Input.GetButtonDown("Jump") && Know_Down_flg == true)//コントローラー操作///GetButton//GetButtonDown//GetButtonUp
+        {
+            animator.SetBool("Idle_Bool", true);//待機アニメーションを始める
+            animator.SetBool("Know_Down_Bool", false);//ノックダウンアニメーションを止める
+            Know_Down_flg = false;
+        }
+
+        //Know_Down_flg
+    }
 }

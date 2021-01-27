@@ -5,13 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
     path: Assets/Toki/Scene/Test_Title.unity
     guid: decae7c626d6ba54cb42ede9881d7949
-  - enabled: 1
+  - enabled: 0
     path: Assets/Toki/Scene/Test_Enemy.unity
     guid: c3b3badfb25649b4690deb5dcbc1296b
+  - enabled: 1
+    path: Assets/Toki/Scene/Stage1.unity
+    guid: eef20f8c8848ab848abc6734c881e2e5
   m_configObjects: {}

@@ -15,9 +15,9 @@ public class Title_To_Main : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-		if(Input.GetKeyDown("space"))
+		if(Input.anyKey)
         {
-            SceneManager.LoadScene("Test_Enemy");
+            SceneManager.LoadScene("Stage1");
         }
 	}
 }

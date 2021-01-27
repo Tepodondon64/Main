@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Toki/Scene/Test_Enemy.unity
+- path: Assets/Toki/Scene/Test_Title.unity
   isLoaded: 1
   isActive: 1
